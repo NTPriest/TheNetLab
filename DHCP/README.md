@@ -123,20 +123,20 @@ We can tell the router:
 
 I could boring you about layers and other stuff but c'cmon. The **Most Important** facts - if you want to look at **OSI Model** or **Inbound**/**Outbound** pages-to know, are:
 ---------------------------------------
-**1. Device sends a broadcast frame**
+- **1. Device sends a broadcast frame**
 - MAC destination: FF:FF:FF:FF:FF:FF (means “send to everyone” - broadcast)
 - IP destination: 255.255.255.255 (also broadcast)
-**2. Frame hits the switch:**
+- **2. Frame hits the switch:**
 -  Switch says: “Oh it's a broadcast? Sure, I’ll flood it to all ports in that VLAN.”
-**3. Frame hits the router** - if we’ve enabled ip helper-address on that router interface…
+- **3. Frame hits the router** - if we’ve enabled ip helper-address on that router interface…
 - The router steps in and transforms the broadcast into a unicast packet.
 - Now the MAC destination is the DHCP server’s MAC.
 - And IP destination is the server’s IP (from the helper-address).
 - The router keeps the original client’s MAC/IP info inside the packet (so the server knows who’s asking).
-**4. Server replies back (Offer)**
+- **4. Server replies back (Offer)**
 - This is a unicast sent back to the router
 - Router knows where the client is and re-converts it (if needed) into a broadcast (if client doesn’t have an IP yet).
-**5. Client gets the Offer and continues the DORA process.**
+-**5. Client gets the Offer and continues the DORA process.**
 ----------------------------------------
 Yeah...Anyway. Let's back to our trace..
 
