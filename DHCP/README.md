@@ -54,11 +54,13 @@ You have only one VLAN on your switch. No tagging, no additional VLANs — just 
 No need to overcomplicate it with dot1q or subinterfaces.
 
 Router: 
-``` Router> enable```  (EXEC privilaged mode)
-``` Router# configure terminal```  (shortcut: "configure terminal)
-``` Router(config)# interface GigabitEthernet0/0/0 ``` (shortcut: int G0/0/0)
-``` Router(config-if)# ip address 192.168.10.1 255.255.255.0``` (here we define ip address on G0/0/0 and netmask)
-``` Router(config-if)# no sh``` (no shutdown - "don't close that port interface cisco-chan" )
+``` 
+Router> enable  (EXEC privilaged mode)
+Router# configure terminal (shortcut: "configure terminal)
+Router(config)# interface GigabitEthernet0/0/0 (shortcut: int G0/0/0)
+Router(config-if)# ip address 192.168.10.1 255.255.255.0(here we define ip address on G0/0/0 and netmask)
+Router(config-if)# no sh (no shutdown - "don't close that port interface cisco-chan" )
+```
 Now, repeat this on the second interface (G0/0/1) for the other switch, using a different IP (e.g., 192.168.20.1).
 Here we go!
 
@@ -161,6 +163,8 @@ DONE!
 4. Hit play, and observe DORA!
 
 ![DORA_proccess](IMGs/DHCP-relay_DORA.gif)
+
+## Configuration on PCs/end-devices after:
 ![PCs_IP_Auto](IMGs/DHCP_auto_PCs.png)
 All working FINE. Congrats! :+1:
 
