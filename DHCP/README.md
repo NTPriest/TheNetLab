@@ -1,19 +1,19 @@
 # Simple DHCP-relay Cofiguration - Cisco Packet tracer
 
-## Project Description
+## Project Description:
 
 This project demonstrates the configuration of **DHCP Relay** across multiple VLANs using a central router also -known as "router-on-a-stick"- and a shared DHCP server. 
 DHCP Relay allows devices in different subnets (VLANs) to obtain IP addresses from **a single DHCP server**, even if they’re not in the same broadcast domain.
 
-## Note
+## Note:
 Using DHCP relay is convenient because it **eliminates the need** to deploy a separate DHCP server in each broadcast domain or VLAN.
 However, it introduces a **single point of failure** — if the centralized DHCP server goes offline, no clients can obtain IP addresses. [APIPA => 169.254.x.x/16]
 While this setup is easier to **manage** and **troubleshoot** (you know exactly where the issue is), **it lacks redundancy** unless backed by a secondary DHCP server or failover configuration.
 
-## Topology
+## Topology:
 ![Network Diagram](IMGs/logicTopology.png)
 
-## 🧰 V-Components Used
+## 🧰 V-Components Used:
 
 - **Router**: ISR4331 (Router1)
 - **Switch**: 2960-24TT (Switch0, Switch1)  
@@ -31,12 +31,12 @@ While this setup is easier to **manage** and **troubleshoot** (you know exactly 
 
 Instruction:
 
-### Note
+### Note:
 Okay... sure, you can do it using the GUI.
 But let’s be honest — when it comes to working with network appliances, the CLI is where the "real power" is.
 It gives you way more flexibility for configuration and experimentation.
 
-## 1.Setting router up
+## 1.Setting router up:
 
 First, we need to assign an IP address to a physical interface.
 Why a physical interface instead of a subinterface (e.g., G0/0/0.10)?
@@ -86,7 +86,7 @@ Go to:
 ![DHCP_Assign_IP](IMGs/DHCP_gui-configuration)
 #### That's all for that configuration!
 
-## Set Scopes.....Scoopy-Scoops 
+## Set Scopes.....Scoopy-Scoops:
 Next step — define a DHCP Scope (aka address pool) for each subnet that should get IPs dynamically.. Yep, each subnet that wants to use the DHCP server needs its own scope.
 Go to:
 **[Services]**->**[DHCP]**
@@ -123,20 +123,20 @@ We can tell the router:
 
 I could boring you about layers and other stuff but c'cmon. The **Most Important** facts - if you want to look at **OSI Model** or **Inbound**/**Outbound** pages-to know, are:
 ---------------------------------------
-**1. Device sends a broadcast frame**
+- **1. Device sends a broadcast frame**
 -  MAC destination: FF:FF:FF:FF:FF:FF (means “send to everyone” - broadcast)
 -  IP destination: 255.255.255.255 (also broadcast)
-**2. Frame hits the switch:**
+- **2. Frame hits the switch:**
 -  Switch says: “Oh it's a broadcast? Sure, I’ll flood it to all ports in that VLAN.”
-**3. Frame hits the router** - if we’ve enabled ip helper-address on that router interface…
+- **3. Frame hits the router** - if we’ve enabled ip helper-address on that router interface…
 -  The router steps in and transforms the broadcast into a unicast packet.
 -  Now the MAC destination is the DHCP server’s MAC.
 -  And IP destination is the server’s IP (from the helper-address).
 -  The router keeps the original client’s MAC/IP info inside the packet (so the server knows who’s asking).
-**4. Server replies back (Offer)**
+- **4. Server replies back (Offer)**
 -  This is a unicast sent back to the router
 -  Router knows where the client is and re-converts it (if needed) into a broadcast (if client doesn’t have an IP yet).
-**5. Client gets the Offer and continues the DORA process.**
+- **5. Client gets the Offer and continues the DORA process.**
 ----------------------------------------
 Yeah...Anyway. Let's back to our trace..
 
