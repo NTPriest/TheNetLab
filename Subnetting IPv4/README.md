@@ -30,7 +30,6 @@ After that, we can convert them to decimal or hexadecimal, but at the lowest lev
 
 In binary it would be:
 ```11000000.10101000.00000001.00000000```
----
 
 ## Explanation
 
@@ -108,7 +107,6 @@ So the full address is:
 Now you know how to translate bits to decimal and vice versa.
 Next, we’ll learn how subnet masks work — how to calculate them, find available hosts, and allocate networks using CIDR and VLSM.
 
-# Subnet Mask
 # Subnet Mask
 
 A **subnet mask** is one of the most important parts of the subnetting process.  
@@ -199,7 +197,7 @@ unless you’re a **network researcher** experimenting with special ranges.
 That means massive, public networks (think: ISPs, telecoms, or global enterprises).  
 
 The **classfull** address range for Class A is:
-`0.0.0.0 – 126.0.0.0/8`
+- `0.0.0.0 – 126.0.0.0/8`
 
 
 ---
@@ -209,7 +207,7 @@ The **classfull** address range for Class A is:
 They’re common for **corporate**, **government**, or **infrastructure-level** networks — something between a LAN and a WAN in scale.  
 
 The **clasfull** range is:
-`128.0.0.0 – 191.255.255.255`
+- `128.0.0.0 – 191.255.255.255`
 
 Class B networks are mid-sized — big enough for organizations or campuses,  
 but not as huge as global WANs.
@@ -228,10 +226,10 @@ On every LAN, many people can have the *same* local IPs — because these addres
 
 The private ranges for Class C (and other LAN scopes) are:
 ### classfull range:
-`192.168.0.0 – 223.255.255.255`
+- `192.168.0.0 – 223.255.255.255`
 
 ### reserved ranges:
-- `192.168.0.0 – 192.168.255.255
+- 192.168.0.0 – 192.168.255.255
 - 172.16.0.0 – 172.31.255.255
 - 10.0.0.0 – 10.255.255.255`
 
@@ -261,7 +259,7 @@ For example:
 ## Class E
 **Class E** is reserved for **experimental and research purposes**.  
 Range:
-240.0.0.0 – 255.255.255.255
+- 240.0.0.0 – 255.255.255.255
 You’ll almost never see these addresses in normal network configs —  
 they’re not routable on the public Internet and are generally reserved for testing.
 
@@ -440,15 +438,16 @@ If you want to do this mentally, remember:
 ## Fast method
 If you fell confidence enough Im going to give you fast way - my way BUT you have to remember a little from that chart:
 Hosts/Subnets in network CIDR:
-/24 H:**254** S:[**1**]
-/25 H:**128** S:[**2**]
-/26 H:**64**  S:[**4**]
-/27 H:**32**  S:[**8**]
-/28 H:**16**  S:[**16**]
-/29 H:**8**   S:[**32**]
-/30 H:**4**   S:[**64**] Router-to-router links
-/31 H:**2**   S:[**128**] P2P links (RFC 3021)*
-/32 H:**1**   S:[**254**] not usefull, loopback or static route
+- /24 H:**254** S:[**1**]
+- /25 H:**128** S:[**2**]
+- /26 H:**64**  S:[**4**]
+- /27 H:**32**  S:[**8**]
+- /28 H:**16**  S:[**16**]
+- /29 H:**8**   S:[**32**]
+- /30 H:**4**   S:[**64**] Router-to-router links
+- /31 H:**2**   S:[**128**] P2P links (RFC 3021)*
+- /32 H:**1**   S:[**254**] not usefull, loopback or static route
+
 `/31` and `/32` are *special*: `/31` is used for point-to-point router links, `/32` for a single IP (loopback or static route).
 
 As you can see, the numbers rise and fall in a proportional pattern as the subnet size changes.
@@ -476,10 +475,10 @@ for `/26`, the block size is **64** in the last octet.
 
 so subnet ranges go like this:
 
-192.168.2.0 - 192.168.2.63
-192.168.2.64 - 192.168.2.127
-192.168.2.128 - 192.168.2.191
-192.168.2.192 - 192.168.2.255
+- 192.168.2.0 - 192.168.2.63
+- 192.168.2.64 - 192.168.2.127
+- 192.168.2.128 - 192.168.2.191
+- 192.168.2.192 - 192.168.2.255
 
 
 so `192.168.2.29` falls inside the first subnet (0–63 range).  
@@ -595,6 +594,7 @@ Example:
 I typed useable hosts (-2)
 
 Congrats you know how subnetting LAN, and more than that. 
+
 
 
 
