@@ -36,8 +36,9 @@ SW_Lab(config)# ip domain name whatevername.com
 After key pair are generated you can enable SSH.
 First you have to know what SSH version your IOS device support 
 ```
-SW_Lab(config)# do show ip ssh |
-[...]**SSH Enabled - version 1.99**
+SW_Lab(config)# do show ip ssh
+**SSH Enabled - version 1.99** [...]
+```
 
 Weird version, isn’t it?  
 `Version 1.99` means that the IOS device supports both:
@@ -82,17 +83,18 @@ SW_Lab(config-line)# transport input ssh 	#only allow SSH (no Telnet)
 SW_Lab(config-line)# end
 ```
 
+---
 📝 **Note**: 
 You must set a domain name — if you don’t, the next command will fail with:
 `% Please define a domain-name first.`
 It’s also a best practice to set a hostname, because the RSA key will be generated using this format:
+
 `<hostname>.<domain-name>`
 
 **4.** Generate the RSA key (this is required for SSH encryption)
 ```
-W_Lab(config)# crypto key generate rsa
+SW_Lab(config)# crypto key generate rsa
 
-```
 Choose the size of the key modulus in the range of 512 to 4096 for your
  General Purpose Keys. Choosing a key modulus greater than 512 may take
  a few minutes.
@@ -101,7 +103,9 @@ How many bits in the modulus [1024]: 2048   # you can specify the key length
 % Generating 2048 bit RSA keys, keys will be non-exportable...
 [OK] (elapsed time was 3 seconds)
 ```
-**5.** Optional, but considered *Best Practice*: after configuring SSH, also set ACL rules for that protocol.  
+
+ ### *Optional, but considered *Best Practice*
+After configuring SSH, also set ACL rules for that protocol.  
 
 Applying an ACL to VTY lines is slightly different from assigning ACLs to interfaces.  
 After creating an ACL with a specific name and rules, apply it to the VTY lines:
@@ -118,32 +122,25 @@ SW_Lab(config)# line vty 0 15
 SW_Lab(config-line)# exec-timeout <minutes> <seconds>  # e.g., exec-timeout 5 30
 ```
 
+---
 📝 **Notes**:  
 - If you want the session to **never expire** (good for labs):  
-```
-exec-timeout 0 0
-```
-
+```exec-timeout 0 0```
+---
 📝**Notes on RSA key length:**
-
 You can choose the key size (modulus) when generating RSA keys:
 
-**512-bit**
-- Outdated, not secure anymore. Use only for testing or old devices.
+**512-bit** - Outdated, not secure anymore. Use only for testing or old devices.
 
-**1024-bit**
-- Still acceptable for homelabs or legacy IOS. Fast to generate.
+**1024-bit** - Still acceptable for homelabs or legacy IOS. Fast to generate.
 
-**2048-bit**
-- Recommended balance between security and performance. 
-Works great for most lab and production environments.
+**2048-bit** - Recommended balance between security and performance. Works great for most lab and production environments.
 
-**4096-bit**
-- Strong encryption, but may slow down older devices during 
+**4096-bit** - Strong encryption, but may slow down older devices during 
             key generation and SSH sessions.
 
 For most lab setups, **2048-bit** is the best choice — secure enough, 
-   fast enough, and won’t burn your switch/router’s CPU.
+   fast enough, and won’t "burn" your switch/router’s CPU.
    
 
 
