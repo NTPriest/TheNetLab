@@ -14,13 +14,13 @@ I’ll provide commands to **enable** (or at least accept) **older encryption al
 
 ## SSH
 
-**1.**Enter privileged (enable) mode:
+**1.** Enter privileged (enable) mode:
 ```
 Switch>enable
 Switch#
 ```
 
-**2.**Enter global configuration mode:
+**2.** Enter global configuration mode:
 ```
 Switch#conf t  # or full command 'configure terminal'
 Switch(config)#
