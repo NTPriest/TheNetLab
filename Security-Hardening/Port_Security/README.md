@@ -52,8 +52,8 @@ This will automatically recover the port after a specified time interval, depend
 *(You can see the available ```<reason>``` values in Privileged EXEC mode by using:
 ```Switch# show errdisable recovery```)*
 
-#### reccovery Interval
+### recovery Interval
 
 ```Switch(config)# errdisable recovery interval <seconds>```  
 
-By default, the errdisable recovery **interval** is set to **300 seconds**. You can change ```<seconds>``` to your preferred value 
+By default, the errdisable recovery **interval** is set to **300 seconds**. You can change ```<seconds>``` to your preferred value.
