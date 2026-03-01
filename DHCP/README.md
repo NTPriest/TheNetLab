@@ -71,7 +71,7 @@ After this step, the links between your switches and the router should turn gree
 
 Welp... now it’s time to configure the DHCP server.
 Unfortunately, in Cisco Packet Tracer, we only have GUI options - there's no CLI (kek).
-Of course, creating a DHCP scope/reservation/exclusion etc. on a real Windows Server is a bit different than in Packet Tracer, but the core concept is the same - In the near future, I’ll make a tutorial for this using real-world tools — stay tuned!
+Of course, creating a DHCP scope/reservation/exclusion etc. on a real Windows Server is a bit different than in Packet Tracer, but the core concept is the same - In the near future, I’ll make a tutorial for this using real-world tools - stay tuned!
 
 
 First we have to assign ip address for DHCP-server. 
