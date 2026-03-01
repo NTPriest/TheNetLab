@@ -13,7 +13,7 @@ With **Port Security**, you can control and limit the devices that can access yo
 
 **MAC Address Binding**: Only devices with specific MAC addresses can be connected to a port. - if not, switch will trigger violation rules
 **Violation Actions**: When an unauthorized device tries to connect, you can set the action the switch should take: 
-- **Shutdown**: The port will be shut down and placed into an error-disabled state. You must manually bring the port back up using ```shutdown``` and ```no shutdown``` commands.
+- **Shutdown**: The port will be shut down and placed into an **error-disabled** state. You must manually bring the port back up using ```shutdown``` and ```no shutdown``` commands or with ```errdisable recovery cause <reason>``` which will automatically recover the port after a specified time interval, depending on the cause (e.g., "violation".
 - **Restrict**: The switch will block the traffic from the unauthorized device but keep the port active. The port will log the violation, and only valid traffic will pass through.
 - **Protect**: The switch will drop packets from unauthorized devices, but the port will remain active. No logging will occur, and the port will not be disabled. - less secure
 
