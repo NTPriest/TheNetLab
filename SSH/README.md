@@ -29,7 +29,7 @@ Switch(config)#
 **3.** Set a hostname and domain name::
 ```
 Switch(config)# hostname SW_Lab
-Switch(config)# ip domain name whatevername.com
+Switch(config)# ip domain name <domain_name.com>
 ```
 
 **4.** Enable SSH
