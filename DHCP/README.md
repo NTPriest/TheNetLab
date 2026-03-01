@@ -7,7 +7,7 @@ DHCP Relay allows devices in different subnets (VLANs) to obtain IP addresses fr
 
 ## Note:
 Using DHCP relay is convenient because it **eliminates the need** to deploy a separate DHCP server in each broadcast domain or VLAN.
-However, it introduces a **single point of failure** — if the centralized DHCP server goes offline, no clients can obtain IP addresses. [APIPA => 169.254.x.x/16]
+However, it introduces a **single point of failure** - if the centralized DHCP server goes offline, no clients can obtain IP addresses. [APIPA => 169.254.x.x/16]
 While this setup is easier to **manage** and **troubleshoot** (you know exactly where the issue is), **it lacks redundancy** unless backed by a secondary DHCP server or failover configuration.
 
 ## Topology:
@@ -20,8 +20,8 @@ While this setup is easier to **manage** and **troubleshoot** (you know exactly 
 - **DHCP Server**: Server-PT ("DHCP-server")
 - **End Devices**: PCs (PC-PT)
 - **VLANs**:
-  - VLAN 10 – 192.168.10.0/24
-  - VLAN 20 – 192.168.20.0/24
+  - VLAN 10 - 192.168.10.0/24
+  - VLAN 20 - 192.168.20.0/24
 
 ## Network Configuration:
 
@@ -33,7 +33,7 @@ Instruction:
 
 ### Note:
 Okay... sure, you can do it using the GUI.
-But let’s be honest — when it comes to working with network appliances, the CLI is where the "real power" is.
+But let’s be honest - when it comes to working with network appliances, the CLI is where the "real power" is.
 It gives you way more flexibility for configuration and experimentation.
 
 ## 1.Setting router up:
@@ -41,16 +41,16 @@ It gives you way more flexibility for configuration and experimentation.
 First, we need to assign an IP address to a physical interface.
 Why a physical interface instead of a subinterface (e.g., G0/0/0.10)?
 
-Well, here's the thing — when your switch has only one VLAN (by default: VLAN1, the first VLAN), and it’s connected point-to-point to the router, you don’t need subinterfaces.
+Well, here's the thing - when your switch has only one VLAN (by default: VLAN1, the first VLAN), and it’s connected point-to-point to the router, you don’t need subinterfaces.
 Just assign the IP directly to the physical port.
 
 ## ⚠️ Disclaimer:
 For security reasons, never use VLAN1 in real-world scenarios. Always create a different VLAN ID.
 (Remember: VLANs 1002–1005 are reserved for Token Ring and FDDI.)
-VLAN1 is like using the default username and password — it’s predictable, and attackers can exploit it using techniques like VLAN hopping.
+VLAN1 is like using the default username and password - it’s predictable, and attackers can exploit it using techniques like VLAN hopping.
 
 **For example:**
-You have only one VLAN on your switch. No tagging, no additional VLANs — just a flat setup.
+You have only one VLAN on your switch. No tagging, no additional VLANs - just a flat setup.
 No need to overcomplicate it with dot1q or subinterfaces.
 
 Router: 
@@ -65,29 +65,29 @@ Now, repeat this on the second interface (G0/0/1) for the other switch, using a 
 Here we go!
 
 ### Note:
-After this step, the links between your switches and the router should turn green on both sides — that's great! That means the connection is up and working.
+After this step, the links between your switches and the router should turn green on both sides - that's great! That means the connection is up and working.
 
 ## DHCP server configuration:
 
 Welp... now it’s time to configure the DHCP server.
-Unfortunately, in Cisco Packet Tracer, we only have GUI options — there's no CLI (kek).
+Unfortunately, in Cisco Packet Tracer, we only have GUI options - there's no CLI (kek).
 Of course, creating a DHCP scope/reservation/exclusion etc. on a real Windows Server is a bit different than in Packet Tracer, but the core concept is the same - In the near future, I’ll make a tutorial for this using real-world tools — stay tuned!
 
 
 First we have to assign ip address for DHCP-server. 
-The server is located in the 192.168.20.0/24 subnet — also part of VLAN20. (switch1)
+The server is located in the 192.168.20.0/24 subnet - also part of VLAN20. (switch1)
 
 Go to:
 **[Desktop]**->**[ip Configuration]**
 - Set ip as **Static** 
 - Netmask: 255.255.255.0 (/24)
 - Gateway: 192.168.20.1 (set to the router IP for VLAN20)
-- DNS: not needed, BUT Packet Tracer forces you to fill it — so just use ```0.0.0.0```
+- DNS: not needed, BUT Packet Tracer forces you to fill it - so just use ```0.0.0.0```
 ![DHCP_Assign_IP](IMGs/DHCP_gui-configuration)
 #### That's all for that configuration!
 
 ## Set Scopes.....Scoopy-Scoops:
-Next step — define a DHCP Scope (aka address pool) for each subnet that should get IPs dynamically.. Yep, each subnet that wants to use the DHCP server needs its own scope.
+Next step - define a DHCP Scope (aka address pool) for each subnet that should get IPs dynamically.. Yep, each subnet that wants to use the DHCP server needs its own scope.
 Go to:
 **[Services]**->**[DHCP]**
 My setup is:
