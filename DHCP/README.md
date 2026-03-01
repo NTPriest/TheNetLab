@@ -13,7 +13,7 @@ While this setup is easier to **manage** and **troubleshoot** (you know exactly 
 ## Topology:
 ![Network Diagram](IMGs/logicTopology.png)
 
-## 🧰 V-Components Used:
+##  V-Components Used:
 
 - **Router**: ISR4331 (Router1)
 - **Switch**: 2960-24TT (Switch0, Switch1)  
@@ -168,7 +168,7 @@ DONE!
 ![PCs_IP_Auto](IMGs/DHCP_auto_PCs.png)
 All working FINE. Congrats! :+1:
 
-# :collision: Troubleshooting:
+# Troubleshooting:
 ## Packet dropped at router?
 ### solution:
 Check if you configured ip helper-address correctly.
