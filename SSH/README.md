@@ -29,14 +29,14 @@ Switch(config)#
 **3.** Set a hostname and domain name::
 ```
 Switch(config)# hostname SW_Lab
-SW_Lab(config)# ip domain name whatevername.com
+Switch(config)# ip domain name whatevername.com
 ```
 
 **4.** Enable SSH
 After key pair are generated you can enable SSH.
 First you have to know what SSH version your IOS device support 
 ```
-SW_Lab(config)# do show ip ssh
+Switch(config)# do show ip ssh
 **SSH Enabled - version 1.99** [...]
 ```
 
@@ -55,12 +55,12 @@ SSH Enabled - version 1.0
 
 **5.** Change SSH version to the latest (recommended):
 ```
-SW_Lab(config)# ip ssh version 2
+Switch(config)# ip ssh version 2
 ```
 
 * **Now check if the IOS successfully updated the version:**
 ```
-SW_Lab(config)# do show ip ssh
+Switch(config)# do show ip ssh
 SSH Enabled - **version 2.0**
 Authentication methods: publickey, keyboard-interactive, password [...]
 ```
@@ -71,16 +71,16 @@ Now the important part:
 
 **6.** Configure user credentials
 ```
-SW_Lab(config)# username <username> privilege 15 secret <password>
+Switch(config)# username <username> privilege 15 secret <password>
 ```
 *The `secret` parameter ensures that your password is **hashed** instead of stored in plaintext in the running or startup config.*
 
 **7.** Enable local login on VTY lines
 ```
-SW_Lab(config)# line vty 0 15      	 	# all available VTY lines
-SW_Lab(config-line)# login local    	 	# only accounts configured locally on the device will be used
-SW_Lab(config-line)# transport input ssh 	#only allow SSH (no Telnet)
-SW_Lab(config-line)# end
+Switch(config)# line vty 0 15      	 	# all available VTY lines
+Switch(config-line)# login local    	 	# only accounts configured locally on the device will be used
+Swtich(config-line)# transport input ssh 	#only allow SSH (no Telnet)
+Switch(config-line)# end
 ```
 
 ---
@@ -93,7 +93,7 @@ It’s also a best practice to set a hostname, because the RSA key will be gener
 
 **4.** Generate the RSA key (this is required for SSH encryption)
 ```
-SW_Lab(config)# crypto key generate rsa
+Switch(config)# crypto key generate rsa
 
 Choose the size of the key modulus in the range of 512 to 4096 for your
  General Purpose Keys. Choosing a key modulus greater than 512 may take
@@ -111,15 +111,15 @@ Applying an ACL to VTY lines is slightly different from assigning ACLs to interf
 After creating an ACL with a specific name and rules, apply it to the VTY lines:
 
 ```
-SW_Lab(config)# line vty 0 15
-SW_Lab(config-line)# access-class <ACL_name> in
+Switch(config)# line vty 0 15
+Switch(config-line)# access-class <ACL_name> in
 ```
 
 You can also configure session timeout:
 
 ```
-SW_Lab(config)# line vty 0 15
-SW_Lab(config-line)# exec-timeout <minutes> <seconds>  # e.g., exec-timeout 5 30
+Switch(config)# line vty 0 15
+Switch(config-line)# exec-timeout <minutes> <seconds>  # e.g., exec-timeout 5 30
 ```
 
 ---
