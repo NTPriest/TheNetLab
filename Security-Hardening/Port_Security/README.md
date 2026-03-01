@@ -13,7 +13,7 @@ With **Port Security**, you can control and limit the devices that can access yo
 
 **MAC Address Binding**: Only devices with specific MAC addresses can be connected to a port. - if not, switch will trigger violation rules
 **Violation Actions**: When an unauthorized device tries to connect, you can set the action the switch should take: 
-- **Shutdown**: The port will be shut down and placed into an **error-disabled** state. You must manually bring the port back up using ```shutdown``` and ```no shutdown``` commands or with ```errdisable recovery cause <reason>``` which will automatically recover the port after a specified time interval, depending on the cause of "violation".
+- **Shutdown**: The port will be shut down and placed into an **error-disabled** state. You must manually bring the port back up using**N[1]**
 - **Restrict**: The switch will block the traffic from the unauthorized device but keep the port active. The port will log the violation, and only valid traffic will pass through.
 - **Protect**: The switch will drop packets from unauthorized devices, but the port will remain active. No logging will occur, and the port will not be disabled. - less secure
 
@@ -35,5 +35,25 @@ Switch(config-if)# end
 If an unauthorized device tries to connect, the switch will trigger the violation action configured for that port.
 
 ## Common mistakes:
-If you plug an RJ45 cable into a port and it turns amber, it doesn’t necessarily mean something’s broken — it just indicates that Port Security is enabled on that interface.
+If you plug an RJ45 cable into a port and it turns amber, it doesn’t necessarily mean something’s broken, it just indicates that Port Security is usually enabled on that interface.
 
+### Note [1]: Recovery from errdisable state:
+
+Usually, you won’t need to manually bring a port back up if you are using *Restrict*, *Protect*, or even *shutdown* violations - if you have enabled automatic errdisable recovery.
+In short, you have two options to recover a port from a specific violation:
+- **Manual** Recovery - Apply ```shutdown``` and ```no shutdown``` on the specific interface where the violation occurred.
+
+- **Automatic** Recovery - Enable it globally with a single command:
+
+```Switch(config)# errdisable recovery cause <reason>``` 
+
+This will automatically recover the port after a specified time interval, depending on the cause (e.g. "violation").
+
+*(You can see the available ```<reason>``` values in Privileged EXEC mode by using:
+```Switch# show errdisable recovery```)*
+
+#### reccovery Interval
+
+```Switch(config)# errdisable recovery interval <seconds>```  
+
+By default, the errdisable recovery **interval** is set to **300 seconds**. You can change ```<seconds>``` to your preferred value 
