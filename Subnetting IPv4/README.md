@@ -10,7 +10,7 @@ Without it, the city would be chaos.
 In networking terms, layer 4 simply wouldn’t exist - the router wouldn’t know where to deliver packets to a specific network or device.  
 Even worse, the whole TCP/IP and ISO/OSI models (the latter being more of a theoretical model) would get stuck at that layer.  
 The only communication possible would be within a LAN, without any routing.  
-Sounds kind of "disabled-friendly," doesn’t it?  
+Sounds kind of "disabled friend," doesn’t it?  
 
 By 2025, IPv4 is pretty much exhausted, and corporations have slowly started migrating to IPv6 - or at least using **Dual Stack** and **NAT64**.  
 But for now, let’s focus on learning how to subnet IPv4.
