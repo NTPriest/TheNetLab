@@ -1,16 +1,16 @@
 # Remote Access configuration on Cisco
 
 You’ll often need to configure and maintain **remote access** to IOS devices.
-One of the first things you’ll want to set up — after assigning a hostname — is SSH.
+One of the first things you’ll want to set up - after assigning a hostname - is SSH.
 
 Now, here’s the catch:
 Some Cisco switches and routers run newer IOS versions, while others are quite old.
 So, where’s the problem?
 
-When an IT guy (or you in your homelab) tries to connect to an **older** IOS device via SSH, you might see an error saying that the encryption algorithms are different — or that the client doesn’t support the older, less secure ciphers.
+When an IT guy (or you in your homelab) tries to connect to an **older** IOS device via SSH, you might see an error saying that the encryption algorithms are different - or that the client doesn’t support the older, less secure ciphers.
 As long as you’re **not** exposing your lab network to the **Internet** (for example, by doing **port forwarding**), it’s totally fine to use older SSH ciphers or weaker encryption settings.
-Just remember — this is only acceptable in a closed, isolated environment.
-I’ll provide commands to **enable** (or at least accept) **older encryption algorithms** on the host side — I’ll explain this in detail at the end of this section.
+Just remember - this is only acceptable in a closed, isolated environment.
+I’ll provide commands to **enable** (or at least accept) **older encryption algorithms** on the host side - I’ll explain this in detail at the end of this section.
 
 ## SSH
 
@@ -42,8 +42,8 @@ SW_Lab(config)# do show ip ssh
 
 Weird version, isn’t it?  
 `Version 1.99` means that the IOS device supports both:
-- **Version 1** — old and not secure  
-- **Version 2** — newer and safe to use
+- **Version 1** - old and not secure  
+- **Version 2** - newer and safe to use
 
 Other possible outputs:
 ```
@@ -85,7 +85,7 @@ SW_Lab(config-line)# end
 
 ---
 📝 **Note**: 
-You must set a domain name — if you don’t, the next command will fail with:
+You must set a domain name - if you don’t, the next command will fail with:
 `% Please define a domain-name first.`
 It’s also a best practice to set a hostname, because the RSA key will be generated using this format:
 
@@ -139,7 +139,7 @@ You can choose the key size (modulus) when generating RSA keys:
 **4096-bit** - Strong encryption, but may slow down older devices during 
             key generation and SSH sessions.
 
-For most lab setups, **2048-bit** is the best choice — secure enough, 
+For most lab setups, **2048-bit** is the best choice - secure enough, 
    fast enough, and won’t "burn" your switch/router’s CPU.
    
 
