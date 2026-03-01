@@ -93,7 +93,7 @@ Go to:
 My setup is:
 - LAN1 [192.168.10.0/24]
 - LAN2 [192.168.20.0/24])
-But of course — name them however you like..
+But of course - name them however you like..
 ![DHCP_Scope](IMGs/DHCP_LAN1_Pool-conf.png)
 
 ## Explanations:
@@ -113,7 +113,7 @@ For that we will use "```ip helper-address <DHCP_ip_address>```"
 
 ## Explanation: 
 ### why need exactly specifed "ip helper-address" - or even type it in?
-Welp... because routers do not forward broadcast packets — and that’s actually a good thing.
+Welp... because routers do not forward broadcast packets - and that’s actually a good thing.
 If they did, your whole network would melt down in a broadcast storm, flooded with packets and frames, clogging everything up like your sist
 ok nvm, bad joke kek.
 
