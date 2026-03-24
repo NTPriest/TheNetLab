@@ -13,6 +13,11 @@ DHCP snooping **protects** the data plane and therefore the control plane agains
 It also builds a **DHCP Snooping Binding Table**, which acts as a database to verify if a device is allowed to send specific queries.
 If the traffic doesn't match the table/records, the IOS device simply drops it."
 
+The more important fact is, that it helps prevent MiTM and more, like:
+- DHCP spoofing,
+- DHCP attack starvation,
+- DHCP poisoning 
+
 To understand the mechanism, we need to remember what messages the DHCP server and client send.
 we will wignore typical words like [DHCP<something>]
 
@@ -88,4 +93,27 @@ switch(config-if)# ip dhcp snooping trust
 
 The device that **acts as** a DHCP server must have the port set to **trusted** - failure to do so will result in errdisable.
 
+# Common problems:
 
+## Option 82
+
+the error log:
+```
+[timestamp] DHCPD: incosistent relay information.
+[timestamp] DHCPD: relay information option exists, but giaddr is zero.
+
+```
+
+*giaddr = Gateway IP Address or *Relay Agent IP Address*
+
+By default, many switches (e.g Cisco) automatically insert DHCP Option 82 (Information Option) into DHCP packets when snooping is enabled.
+
+The problem is: If your switch is acting purely as a Layer 2 device and not as a DHCP Relay Agent, adding this info can cause the DHCP server to drop the packets (because it thinks the packet is "malformed" or "untrusted").
+To disable marking option 82 by dhcp snooping:
+
+```switch(config)#no ip dhcp snooping information option```
+
+**Note**: Remember always apply this command on access switches that are not acting as the DHCP Relay. It ensures the DHCP packets remain recognizable by the server/router etc.
+
+
+##
